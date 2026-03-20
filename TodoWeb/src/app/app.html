@@ -1,0 +1,23 @@
+<div style="max-width: 500px; margin: 50px auto; padding: 20px; border: 1px solid #ddd; border-radius: 8px; font-family: sans-serif;">
+  <h1>TODO List</h1>
+
+  <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+    <input 
+      [(ngModel)]="newTodoTitle" 
+      (keyup.enter)="addTodo()"
+      placeholder="What needs to be done?" 
+      style="flex: 1; padding: 8px; font-size: 16px;">
+    <button (click)="addTodo()" style="padding: 8px 16px; font-size: 16px; cursor: pointer;">Add</button>
+  </div>
+
+  <ul style="list-style: none; padding: 0;">
+    @for (todo of todoService.todos(); track todo.id) {
+      <li style="display: flex; justify-content: space-between; margin-bottom: 10px; border-bottom: 1px solid #eee; padding-bottom: 10px;">
+        <span style="font-size: 18px;">{{ todo.title }}</span>
+        <button (click)="todoService.deleteTodo(todo.id)" style="color: red; cursor: pointer; border: none; background: none;">Delete</button>
+      </li>
+    } @empty {
+      <p style="text-align: center; color: #888;">No Todo task yet. Add one above!</p>
+    }
+  </ul>
+</div>
